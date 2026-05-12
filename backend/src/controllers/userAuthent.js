@@ -27,11 +27,12 @@ const register = async (req,res)=>{
         role:user.role,
     }
     
-     res.cookie('token',token,{maxAge: 7 * 24 * 60 * 60 * 1000});
-     res.status(201).json({
-        user:reply,
-        message:"Loggin Successfully"
-    })
+     res.cookie('token', token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+        });
     }
     catch(err){
         res.status(400).send("Error: "+err);
@@ -64,11 +65,12 @@ const login = async (req,res)=>{
         }
 
         const token =  jwt.sign({_id:user._id , emailId:emailId, role:user.role},process.env.JWT_KEY,{expiresIn: '7d'});
-        res.cookie('token',token,{maxAge: 7 * 24 * 60 * 60 * 1000});
-        res.status(201).json({
-            user:reply,
-            message:"Loggin Successfully"
-        })
+        res.cookie('token', token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+        });
     }
     catch(err){
         res.status(401).send("Error: "+err);
@@ -90,8 +92,12 @@ const logout = async(req,res)=>{
     //    Token add kar dung Redis ke blockList
     //    Cookies ko clear kar dena.....
 
-    res.cookie("token",null,{expires: new Date(Date.now())});
-    res.send("Logged Out Succesfully");
+    res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true
+    });
 
     }
     catch(err){
