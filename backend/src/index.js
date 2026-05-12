@@ -9,16 +9,15 @@ const problemRouter = require("./routes/problemCreator");
 const submitRouter = require("./routes/submit")
 const aiRouter = require("./routes/aiChatting")
 const videoRouter = require("./routes/videoCreator");
-const cors = require('cors')
-
-// console.log("Hello")
-
-// console.log("REDIS_PASS:", process.env.REDIS_PASS); // ← add this
+const cors = require('cors');
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true 
-}))
+  origin: [
+    'http://localhost:5173',
+    'https://algo-forge-mauve.vercel.app'
+  ],
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
