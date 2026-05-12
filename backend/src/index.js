@@ -19,8 +19,10 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true  // ← make sure this is there
 }));
+
+
 
 app.use(express.json());
 app.use(cookieParser());
