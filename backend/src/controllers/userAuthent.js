@@ -27,13 +27,14 @@ const register = async (req,res)=>{
         role:user.role,
     }
     
-     res.cookie('token', token, {
+        res.cookie('token', token, {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         sameSite: 'none',
         secure: true
         });
-    }
+        res.status(201).json(reply);  // ← ADD THIS
+        }
     catch(err){
         res.status(400).send("Error: "+err);
     }
@@ -71,6 +72,7 @@ const login = async (req,res)=>{
         sameSite: 'none',
         secure: true
         });
+        res.status(200).json(reply);  // ← ADD THIS
     }
     catch(err){
         res.status(401).send("Error: "+err);
@@ -98,6 +100,8 @@ const logout = async(req,res)=>{
     sameSite: 'none',
     secure: true
     });
+
+    res.status(200).json({ message: "Logged out successfully" });
 
     }
     catch(err){
