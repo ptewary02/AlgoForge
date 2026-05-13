@@ -85,6 +85,7 @@ const submitCode = async (req, res) => {
       errorMessage,
     });
   } catch (err) {
+    console.error("SUBMIT ERROR:", err); // ← already logs to Render
     res.status(500).send("Internal Server Error: " + err.message);
   }
 };
