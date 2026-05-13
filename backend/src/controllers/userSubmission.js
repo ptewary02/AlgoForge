@@ -71,7 +71,10 @@ const submitCode = async (req, res) => {
     submission.memory = memory;
     await submission.save();
 
-    if (allPassed && !req.result.problemSolved.includes(problemId)) {
+    const alreadySolved = req.result.problemSolved.some(
+      id => id.toString() === problemId.toString()
+    );
+    if (allPassed && !alreadySolved) {
       req.result.problemSolved.push(problemId);
       await req.result.save();
     }
