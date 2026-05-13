@@ -33,7 +33,7 @@ const register = async (req,res)=>{
         sameSite: 'none',
         secure: true
         });
-        res.status(201).json(reply);  // ← ADD THIS
+        res.status(201).json({ user: reply });  // ← ADD THIS
         }
     catch(err){
         res.status(400).send("Error: "+err);
@@ -72,7 +72,7 @@ const login = async (req,res)=>{
         sameSite: 'none',
         secure: true
         });
-        res.status(200).json(reply);  // ← ADD THIS
+        res.status(200).json({ user: reply });
     }
     catch(err){
         res.status(401).send("Error: "+err);
